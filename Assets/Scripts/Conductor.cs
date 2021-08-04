@@ -27,6 +27,8 @@ public class Conductor : MonoBehaviour
 
     public float firstBeatOffset;
 
+    float lastbeat = 0;
+
 
     // Calculates songPosition from a songPositionInBeats
     // Useful for checking future and past beats
@@ -78,8 +80,24 @@ public class Conductor : MonoBehaviour
         // maybe use pitch so you can speed up and slow down songs
         // songPosition = (float)(AudioSettings.dspTime - dsptimesong) * song.pitch - offset;
 
-
         //determine how many beats since the song started
         songPositionInBeats = songPosition / secPerBeat;
+
+
+        if (songPosition > lastbeat + secPerBeat)
+        {
+            lastbeat += secPerBeat;
+
+
+            BeatHappened();
+        }
+    }
+
+    // subscribe to this
+    public event Action onBeat;
+    // fires trigger
+    public void BeatHappened()
+    {
+        onBeat();
     }
 }

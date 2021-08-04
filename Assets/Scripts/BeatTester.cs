@@ -5,7 +5,6 @@ using UnityEngine;
 public class BeatTester : MonoBehaviour
 {
     Conductor conductor;
-    float lastbeat = 0;
     SpriteRenderer spriteRenderer;
     AudioSource audioPlayer;
     public AudioClip soundEffect;
@@ -17,26 +16,27 @@ public class BeatTester : MonoBehaviour
         conductor = FindObjectOfType<Conductor>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioPlayer = FindObjectOfType<AudioSource>();
+
+        conductor.onBeat += doThing;
     }
-    void LateUpdate()
+
+    private void OnDestroy()
     {
+        conductor.onBeat -= doThing;
+    }
 
-        if (conductor.songPosition > lastbeat + conductor.secPerBeat)
+    void doThing()
+    {
+        audioPlayer.PlayOneShot(soundEffect);
+        if (toggler == 0)
         {
-            audioPlayer.PlayOneShot(soundEffect);
-            if (toggler == 0)
-            {
-                toggler = 1;
-            }
-            else
-            {
-                toggler = 0;
-            }
-
-            spriteRenderer.color = colors[toggler];
-            lastbeat += conductor.secPerBeat;
-
+            toggler = 1;
+        }
+        else
+        {
+            toggler = 0;
         }
 
+        spriteRenderer.color = colors[toggler];
     }
 }
