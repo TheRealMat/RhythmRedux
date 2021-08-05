@@ -36,7 +36,6 @@ public class NoteSpawner : MonoBehaviour
         // how much time remains before next beat
         float timeTillBeat = nextBeatTime - conductor.songPosition;
 
-        Debug.Log(timeTillBeat);
         foreach (GameObject spawnPosition in spawnPositions)
         {
             GameObject tmp = Instantiate(notePrefab, spawnPosition.transform.position, Quaternion.identity, transform);
