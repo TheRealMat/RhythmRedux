@@ -1239,7 +1239,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a52ce0468b9fda64eaf28b6715801ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceptableDeviation: 0.2
   events: {fileID: 1344507690}
+  acceptableDeviationSeconds: 0
 --- !u!4 &1344507688
 Transform:
   m_ObjectHideFlags: 0

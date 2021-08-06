@@ -101,6 +101,11 @@ public class Conductor : MonoBehaviour
 
             gameManager.events.BeatHappened();
         }
+
+        if (songPosition > lastbeat + secPerBeat + gameManager.acceptableDeviationSeconds)
+        {
+            gameManager.events.TooLate();
+        }
     }
 
 
