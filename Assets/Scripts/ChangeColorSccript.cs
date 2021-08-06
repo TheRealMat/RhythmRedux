@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ChangeColorSccript : MonoBehaviour
 {
-    Conductor conductor;
+    GameManager gameManager;
     Renderer tileRenderer;
     bool toggler = false;
     void Start()
     {
-        conductor = FindObjectOfType<Conductor>();
+        gameManager = FindObjectOfType<GameManager>();
         tileRenderer = GetComponent<Renderer>();
-        conductor.onBeat += ChangeColor;
+        gameManager.events.onBeat += ChangeColor;
     }
 
     void ChangeColor()

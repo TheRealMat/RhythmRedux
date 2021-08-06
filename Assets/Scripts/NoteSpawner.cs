@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
+    GameManager gameManager;
     Conductor conductor;
     public GameObject notePrefab;
     public GameObject[] spawnPositions;
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
         conductor = FindObjectOfType<Conductor>();
 
-        conductor.onBeat += SpawnNote;
+        gameManager.events.onBeat += SpawnNote;
     }
 
     private void OnDestroy()
     {
-        conductor.onBeat -= SpawnNote;
+        gameManager.events.onBeat -= SpawnNote;
     }
 
     void SpawnNote()

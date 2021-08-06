@@ -7,6 +7,7 @@ using UnityEngine;
 public class Conductor : MonoBehaviour
 {
     public LevelMusic levelMusic;
+    GameManager gameManager;
 
     //Song beats per minute
     //This is determined by the song you're trying to sync up to
@@ -63,6 +64,9 @@ public class Conductor : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
+
+
         songBpm = levelMusic.BPM;
 
         //Load the AudioSource attached to the Conductor GameObject
@@ -95,15 +99,9 @@ public class Conductor : MonoBehaviour
             lastbeat += secPerBeat;
 
 
-            BeatHappened();
+            gameManager.events.BeatHappened();
         }
     }
 
-    // subscribe to this
-    public event Action onBeat;
-    // fires trigger
-    public void BeatHappened()
-    {
-        onBeat();
-    }
+
 }

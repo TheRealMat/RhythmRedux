@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
     // 0.5 and above should mean that it is impossible to fail
     float acceptableDeviation = 0.2f;
 
+    public GameEvents events;
 
     Conductor conductor;
 
     private void Start()
     {
+        events = FindObjectOfType<GameEvents>();
         conductor = FindObjectOfType<Conductor>();
     }
 
