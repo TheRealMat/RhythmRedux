@@ -20,7 +20,7 @@ public class Control : MonoBehaviour
 
             
 
-            gameManager.ValidateMove();
+            gameManager.ValidateMoveTiming();
 
         }
     }

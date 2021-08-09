@@ -10,37 +10,68 @@ public class GameEvents : MonoBehaviour
     // fires trigger
     public void BeatHappened()
     {
-        onBeat();
+        // crash if nothing subsribed
+        if (onBeat != null)
+        {
+            onBeat();
+        }
     }
 
     //  fires acceptableDeviationSeconds after each beat
     public event Action onTooLate;
     public void TooLate()
     {
-        onTooLate();
+        if (onTooLate != null)
+        {
+            onTooLate();
+        }
+
     }
 
 
 
     // player attempted to move
-    public event Action onMoveAttempt;
-    public void MoveAttempted()
+    public event Action<Vector2> onMoveAttempt;
+    public void MoveAttempted(Vector2 desiredPosition)
     {
-        onMoveAttempt();
+        if (onMoveAttempt != null)
+        {
+            onMoveAttempt(desiredPosition);
+        }
+
+    }
+
+    // move player
+    public event Action<Vector2> onMovePlayer;
+    public void MovePlayer(Vector2 desiredPosition)
+    {
+        if (onMovePlayer != null)
+        {
+            onMovePlayer(desiredPosition);
+        }
+
     }
 
     // player either hit too early or not at all
     public event Action onBeatMissed;
     public void BeatMissed()
     {
-        onBeatMissed();
+        if (onBeatMissed != null)
+        {
+                onBeatMissed();
+        }
+
     }
 
     // player successfully hit on the beat
     public event Action onBeatHit;
     public void BeatHit()
     {
-        onBeatHit();
+        if (onBeatHit != null)
+        {
+            onBeatHit();
+        }
+
     }
 
 
@@ -48,7 +79,11 @@ public class GameEvents : MonoBehaviour
     public event Action onNextTurn;
     public void NextTurn()
     {
-        onNextTurn();
+        if (onNextTurn != null)
+        {
+            onNextTurn();
+        }
+
     }
 
 }

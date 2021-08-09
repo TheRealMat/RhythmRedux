@@ -28,10 +28,11 @@ public class GameManager : MonoBehaviour
         events.onMoveAttempt += ManagePlayerMove;
         events.onTooLate += PlayerTooLate;
         events.onNextTurn += NewTurn;
+        events.onBeatMissed += PlayerMissedBeat;
     }
 
     // checks if player's input was on time
-    public bool ValidateMove()
+    public bool ValidateMoveTiming()
     {
         float exactBeatTime = conductor.GetPerfectBeatTime(conductor.songPositionInBeats);
 
@@ -46,18 +47,29 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void ManagePlayerMove()
+    void ManagePlayerMove(Vector2 desiredPosition)
     {
-        playerMoved = true;
+        // check if hitting a wall or something
 
-        if (ValidateMove())
+
+        // do not allow to move twice
+        if (playerMoved == true)
         {
-            events.BeatHit();
-            events.NextTurn();
             return;
         }
-        events.BeatMissed();
-        events.NextTurn();
+        playerMoved = true;
+
+        if (ValidateMoveTiming())
+        {
+            events.MovePlayer(desiredPosition);
+            events.BeatHit();
+            events.NextTurn();
+        }
+        else
+        {
+            events.BeatMissed();
+        }
+
     }
     // player did not move in time
     void PlayerTooLate()
@@ -71,8 +83,12 @@ public class GameManager : MonoBehaviour
         if (playerMoved == false)
         {
             events.BeatMissed();
-            events.NextTurn();
         }
+    }
+
+    void PlayerMissedBeat()
+    {
+        events.NextTurn();
     }
 
     void NewTurn()
