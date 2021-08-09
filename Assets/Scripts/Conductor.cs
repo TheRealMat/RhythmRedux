@@ -31,7 +31,7 @@ public class Conductor : MonoBehaviour
     public float firstBeatOffset;
 
     float lastbeat = 0;
-
+    bool tooLateFired = false;
 
     // Calculates songPosition from a songPositionInBeats
     // Useful for checking future and past beats
@@ -98,13 +98,18 @@ public class Conductor : MonoBehaviour
         {
             lastbeat += secPerBeat;
 
-
+            tooLateFired = false;
             gameManager.events.BeatHappened();
         }
 
-        if (songPosition > lastbeat + secPerBeat + gameManager.acceptableDeviationSeconds)
+        if (songPosition > lastbeat + gameManager.acceptableDeviationSeconds)
         {
-            gameManager.events.TooLate();
+            if (tooLateFired == false)
+            {
+                tooLateFired = true;
+                gameManager.events.TooLate();
+            }
+
         }
     }
 
