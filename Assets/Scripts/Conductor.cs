@@ -6,7 +6,8 @@ using UnityEngine;
 // this class is used to keep the beat
 public class Conductor : MonoBehaviour
 {
-    public LevelMusic levelMusic;
+    public MusicMetaPair musicMetaPair;
+
     GameManager gameManager;
 
     //Song beats per minute
@@ -67,10 +68,13 @@ public class Conductor : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
 
 
-        songBpm = levelMusic.BPM;
-
         //Load the AudioSource attached to the Conductor GameObject
         musicSource = GetComponent<AudioSource>();
+    }
+
+    public void StartMusic()
+    {
+        songBpm = musicMetaPair.meta.BPM;
 
         //Calculate the number of seconds in each beat
         secPerBeat = 60f / songBpm;
@@ -78,13 +82,18 @@ public class Conductor : MonoBehaviour
         //Record the time when the music starts
         dspSongTime = (float)AudioSettings.dspTime;
 
-        musicSource.clip = levelMusic.Song;
+        musicSource.clip = musicMetaPair.music;
 
         //Start the music
         musicSource.Play();
     }
     void Update()
     {
+        if (!musicSource.isPlaying)
+        {
+            return;
+        }
+
         //determine how many seconds since the song started
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
         // maybe use pitch so you can speed up and slow down songs

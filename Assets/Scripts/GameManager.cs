@@ -21,9 +21,6 @@ public class GameManager : MonoBehaviour
     {
         events = FindObjectOfType<GameEvents>();
         conductor = FindObjectOfType<Conductor>();
-        // calculated with secPerBeat so it scales with speed of the song
-        // 1 would be the entire secPerBeat and 0.5 would be half. Half is the cutoff point to where you can actually miss a beat
-        acceptableDeviationSeconds = conductor.secPerBeat * acceptableDeviation;
 
         events.onMoveAttempt += ManagePlayerMove;
         events.onTooLate += PlayerTooLate;
@@ -34,6 +31,11 @@ public class GameManager : MonoBehaviour
     // checks if player's input was on time
     public bool ValidateMoveTiming()
     {
+
+        // calculated with secPerBeat so it scales with speed of the song
+        // 1 would be the entire secPerBeat and 0.5 would be half. Half is the cutoff point to where you can actually miss a beat
+        acceptableDeviationSeconds = conductor.secPerBeat * acceptableDeviation;
+
         float exactBeatTime = conductor.GetPerfectBeatTime(conductor.songPositionInBeats);
 
         float upperAcceptableBound = exactBeatTime + acceptableDeviationSeconds;
