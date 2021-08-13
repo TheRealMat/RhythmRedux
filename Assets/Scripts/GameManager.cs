@@ -13,13 +13,13 @@ public class GameManager : MonoBehaviour
 
     Conductor conductor;
 
-    FileHandler fileHandler;
+    public FileHandler fileHandler;
 
     bool playerMoved;
 
     public float acceptableDeviationSeconds;
 
-    private async void Start()
+    private async void Awake()
     {
         events = FindObjectOfType<GameEvents>();
         conductor = FindObjectOfType<Conductor>();
@@ -30,8 +30,7 @@ public class GameManager : MonoBehaviour
         events.onNextTurn += NewTurn;
         events.onBeatMissed += PlayerMissedBeat;
 
-        fileHandler.Setup();
-        await fileHandler.LoadSongs();
+        await fileHandler.Setup();
     }
 
     public void StartGame()

@@ -12,16 +12,59 @@ public class FileHandler : MonoBehaviour
 
     public List<MusicMetaPair> musicMetaPairs = new List<MusicMetaPair>();
     string directoryPath;
+    public Config config;
 
-    public void Setup()
+    public async Task Setup()
     {
         conductor = FindObjectOfType<Conductor>();
 
         directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RhythmRedux Music");
         Directory.CreateDirectory(directoryPath);
         DeleteLoneMetaFiles();
+
+        await LoadSongs();
+        config = LoadConfig();
     }
 
+    Config LoadConfig()
+    {
+        string configPath = Path.Combine(directoryPath, "config.json");
+
+        // make config if doesn't exist
+        if (!File.Exists(configPath))
+        {
+            SaveConfigFile(MakeConfigObject(), configPath);
+        }
+
+
+        // read file
+        StreamReader reader = new StreamReader(configPath);
+        string json = reader.ReadToEnd();
+        reader.Close();
+
+        // json to object
+        Config config = JsonUtility.FromJson<Config>(json);
+
+        return config;
+    }
+    void SaveConfigFile(Config config, string path)
+    {
+        string metaPath = path;
+        string json = JsonUtility.ToJson(config);
+        File.WriteAllText(metaPath, json);
+    }
+
+    Config MakeConfigObject()
+    {
+        Config config = new Config()
+        {
+            up = KeyCode.W,
+            down = KeyCode.S,
+            left = KeyCode.A,
+            right = KeyCode.D
+        };
+        return config;
+    }
 
     public async Task LoadSongs()
     {
