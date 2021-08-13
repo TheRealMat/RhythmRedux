@@ -13,19 +13,35 @@ public class GameManager : MonoBehaviour
 
     Conductor conductor;
 
+    FileHandler fileHandler;
+
     bool playerMoved;
 
     public float acceptableDeviationSeconds;
 
-    private void Start()
+    private async void Start()
     {
         events = FindObjectOfType<GameEvents>();
         conductor = FindObjectOfType<Conductor>();
+        fileHandler = FindObjectOfType<FileHandler>();
 
         events.onMoveAttempt += ManagePlayerMove;
         events.onTooLate += PlayerTooLate;
         events.onNextTurn += NewTurn;
         events.onBeatMissed += PlayerMissedBeat;
+
+        fileHandler.Setup();
+        await fileHandler.LoadSongs();
+    }
+
+    public void StartGame()
+    {
+        conductor.musicMetaPair = fileHandler.musicMetaPairs[0];
+        conductor.StartMusic();
+    }
+    public void PauseGame()
+    {
+        conductor.PauseMusic();
     }
 
     // checks if player's input was on time

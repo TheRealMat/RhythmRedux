@@ -86,7 +86,15 @@ public class Conductor : MonoBehaviour
 
         //Start the music
         musicSource.Play();
+
     }
+
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+    }
+
+
     void Update()
     {
         if (!musicSource.isPlaying)

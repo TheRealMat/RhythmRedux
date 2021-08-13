@@ -10,26 +10,20 @@ public class FileHandler : MonoBehaviour
 {
     Conductor conductor;
 
-    List<MusicMetaPair> musicMetaPairs = new List<MusicMetaPair>();
+    public List<MusicMetaPair> musicMetaPairs = new List<MusicMetaPair>();
+    string directoryPath;
 
-    // game should wait for this to be done
-    async void Start()
+    public void Setup()
     {
         conductor = FindObjectOfType<Conductor>();
 
-        var directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RhythmRedux Music");
+        directoryPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "RhythmRedux Music");
         Directory.CreateDirectory(directoryPath);
-
-        await LoadSongs(directoryPath);
         DeleteLoneMetaFiles();
-
-
-        //debug
-        conductor.musicMetaPair = musicMetaPairs[0];
-        conductor.StartMusic();
     }
 
-    async Task LoadSongs(string directoryPath)
+
+    public async Task LoadSongs()
     {
         string[] musicPaths = Directory.GetFiles(directoryPath, "*.wav");
 
