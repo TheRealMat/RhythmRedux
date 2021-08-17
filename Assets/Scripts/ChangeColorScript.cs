@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeColorSccript : MonoBehaviour
+public class ChangeColorScript : MonoBehaviour
 {
     GameManager gameManager;
     Renderer tileRenderer;
