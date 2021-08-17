@@ -89,8 +89,17 @@ public class Conductor : MonoBehaviour
 
     }
 
+    public void ContinueMusic()
+    {
+        AudioListener.pause = false;
+        musicSource.UnPause();
+    }
+
     public void PauseMusic()
     {
+        // pauses timer
+        AudioListener.pause = true;
+        // pauses audio
         musicSource.Pause();
     }
 

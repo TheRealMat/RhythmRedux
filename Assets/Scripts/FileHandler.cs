@@ -61,7 +61,8 @@ public class FileHandler : MonoBehaviour
             up = KeyCode.W,
             down = KeyCode.S,
             left = KeyCode.A,
-            right = KeyCode.D
+            right = KeyCode.D,
+            pause = KeyCode.Escape
         };
         return config;
     }

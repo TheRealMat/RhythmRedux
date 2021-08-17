@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
 
     public float acceptableDeviationSeconds;
 
+    public GameObject pauseMenu;
+
+    bool gameStarted;
+
     private async void Awake()
     {
         events = FindObjectOfType<GameEvents>();
@@ -35,12 +39,25 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        if (gameStarted == true)
+        {
+            UnpauseGame();
+            return;
+        }
+        gameStarted = true;
+
         conductor.musicMetaPair = fileHandler.musicMetaPairs[0];
         conductor.StartMusic();
     }
     public void PauseGame()
     {
+
         conductor.PauseMusic();
+        pauseMenu.SetActive(true);
+    }
+    public void UnpauseGame()
+    {
+        conductor.ContinueMusic();
     }
 
     // checks if player's input was on time

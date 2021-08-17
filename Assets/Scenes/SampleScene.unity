@@ -1606,6 +1606,7 @@ MonoBehaviour:
   events: {fileID: 1344507690}
   fileHandler: {fileID: 0}
   acceptableDeviationSeconds: 0
+  pauseMenu: {fileID: 772615055}
 --- !u!4 &1344507688
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,7 +2094,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afb7b76871ebadc4ba6bb4d23004a2c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 0}
 --- !u!4 &2055256254
 Transform:
   m_ObjectHideFlags: 0

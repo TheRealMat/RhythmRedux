@@ -30,5 +30,9 @@ public class Control : MonoBehaviour
         {
             gameManager.events.MoveAttempted(new Vector2(player.transform.position.x + 1, player.transform.position.y));
         }
+        else if (Input.GetKeyDown(gameManager.fileHandler.config.pause))
+        {
+            gameManager.PauseGame();
+        }
     }
 }
