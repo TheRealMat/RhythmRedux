@@ -16,19 +16,19 @@ public class Control : MonoBehaviour
     {
         if (Input.GetKeyDown(gameManager.fileHandler.config.up))
         {
-            gameManager.events.MoveAttempted(new Vector2(player.transform.position.x, player.transform.position.y + 1));
+            gameManager.events.MoveAttempted(new Vector2(0, 1));
         }
         else if (Input.GetKeyDown(gameManager.fileHandler.config.down))
         {
-            gameManager.events.MoveAttempted(new Vector2(player.transform.position.x, player.transform.position.y - 1));
+            gameManager.events.MoveAttempted(new Vector2(0, -1));
         }
         else if (Input.GetKeyDown(gameManager.fileHandler.config.left))
         {
-            gameManager.events.MoveAttempted(new Vector2(player.transform.position.x - 1, player.transform.position.y));
+            gameManager.events.MoveAttempted(new Vector2(-1, 0));
         }
         else if (Input.GetKeyDown(gameManager.fileHandler.config.right))
         {
-            gameManager.events.MoveAttempted(new Vector2(player.transform.position.x + 1, player.transform.position.y));
+            gameManager.events.MoveAttempted(new Vector2(+1, 0));
         }
         else if (Input.GetKeyDown(gameManager.fileHandler.config.pause))
         {

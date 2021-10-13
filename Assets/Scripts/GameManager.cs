@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public GameEvents events;
 
-    Conductor conductor;
+    public Conductor conductor;
 
     public FileHandler fileHandler;
 

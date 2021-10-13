@@ -32,11 +32,11 @@ public class GameEvents : MonoBehaviour
 
     // player attempted to move
     public event Action<Vector2> onMoveAttempt;
-    public void MoveAttempted(Vector2 desiredPosition)
+    public void MoveAttempted(Vector2 desiredDirection)
     {
         if (onMoveAttempt != null)
         {
-            onMoveAttempt(desiredPosition);
+            onMoveAttempt(desiredDirection);
         }
 
     }
