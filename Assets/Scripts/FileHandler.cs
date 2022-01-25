@@ -80,7 +80,7 @@ public class FileHandler : MonoBehaviour
             MusicMeta meta;
 
             // get or create meta file
-            if (File.Exists(path + "json"))
+            if (File.Exists(path + ".json"))
             {
                 meta = GetMeta(path);
             }
